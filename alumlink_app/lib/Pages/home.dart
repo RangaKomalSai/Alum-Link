@@ -1,4 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:alumlink_app/Fields/AIML.dart';
+import 'package:alumlink_app/Fields/DS.dart';
+import 'package:alumlink_app/Fields/dev.dart';
+import 'package:alumlink_app/Fields/cybersec.dart';
+import 'package:alumlink_app/Fields/Networking.dart';
+import 'package:alumlink_app/Fields/Fin.dart';
+import 'package:alumlink_app/Fields/mart.dart';
+import 'package:alumlink_app/Fields/mgmt.dart';
+import 'package:alumlink_app/Fields/elec.dart';
+import 'package:alumlink_app/Fields/mech.dart';
+import 'package:alumlink_app/Fields/civil.dart';
+import 'package:alumlink_app/Fields/chem.dart';
+import 'package:alumlink_app/Fields/aero.dart';
+import 'package:alumlink_app/Fields/physics.dart';
+import 'package:alumlink_app/Profile/profile.dart';
+import 'package:alumlink_app/Content/homepage.dart';
+import 'package:alumlink_app/Content/Mentorship.dart';
+import 'package:alumlink_app/Content/jobs.dart';
+import 'package:alumlink_app/Content/directorypage.dart';
+import 'package:alumlink_app/Content/settings.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,12 +28,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page'),
-    Text('Directory'),
-    Text('Mentorship'),
-    Text('Jobs'),
-    Text('Settings'),
+  static List<Widget> _widgetOptions = <Widget>[
+    HomePageContent(),
+    MentorshipPage(),
+    JobsPage(),
+    DirectoryPage(),
+    SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -25,40 +45,48 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Alumlink'),
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 24),
-        centerTitle: true,
-        backgroundColor: Colors.blue[200],
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0), // Set preferred height of app bar
+        child: AppBar(
+          toolbarHeight: 60.0, // Set height of app bar
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundImage: AssetImage("lib/Images/Alumlinklogo.png"),
+              ),
+              SizedBox(width: 15), // Adjust spacing between logo and title
+              Text(
+                'Alumlink',
+                style: TextStyle(color: Colors.black, fontSize: 30 ,fontFamily:'MyFont1'),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.blue[200],
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.account_circle , size: 30,),
+              tooltip: 'Profile',
               onPressed: () {
-                Scaffold.of(context).openDrawer();
+                // Navigate to profile page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
               },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
+            ),
+            SizedBox(width: 10),
+            IconButton(
+              icon: const Icon(Icons.logout , size: 30,),
+              tooltip: 'Logout',
+              onPressed: () {
+                // Perform logout action
+              },
+            ),
+            SizedBox(width: 10),
+          ],
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.account_circle),
-            tooltip: 'Profile',
-            onPressed: () {
-              // Navigate to profile page
-            },
-          ),
-          SizedBox(width: 10),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-            onPressed: () {
-              // Logout
-            },
-          ),
-          SizedBox(width: 10)
-        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -85,7 +113,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('AI/ML'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AIML()),
+                );
               },
             ),
             ListTile(
@@ -94,7 +125,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Datascience'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DS()),
+                );
               },
             ),
             ListTile(
@@ -103,7 +137,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Software Development'),
               onTap: () {
-                // Navigate to settings pagex
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => dev()),
+                );
               },
             ),
             ListTile(
@@ -112,7 +149,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Cybersecurity'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => cybersec()),
+                );
               },
             ),
             ListTile(
@@ -121,7 +161,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Networking'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Networking()),
+                );
               },
             ),
             ListTile(
@@ -130,7 +173,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Finance'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Fin()),
+                );
               },
             ),
             ListTile(
@@ -139,7 +185,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Marketing'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mart()),
+                );
               },
             ),
             ListTile(
@@ -148,7 +197,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Management'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mgmt()),
+                );
               },
             ),
             ListTile(
@@ -157,7 +209,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Electrical and Electronics'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => elec()),
+                );
               },
             ),
             ListTile(
@@ -166,7 +221,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Mechanical'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mech()),
+                );
               },
             ),
             ListTile(
@@ -175,7 +233,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Civil'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => civil()),
+                );
               },
             ),
             ListTile(
@@ -184,7 +245,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Chemical'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => chem()),
+                );
               },
             ),
             ListTile(
@@ -193,7 +257,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Aerospace'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => aero()),
+                );
               },
             ),
             ListTile(
@@ -202,7 +269,10 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Physics'),
               onTap: () {
-                // Logout
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => physics()),
+                );
               },
             ),
           ],
@@ -228,6 +298,10 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.work),
               label: 'Jobs',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people_alt_outlined),
+              label: 'Directory',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
