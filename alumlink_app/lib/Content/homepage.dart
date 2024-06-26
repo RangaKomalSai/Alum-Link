@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:alumlink_app/Events/event_card.dart';
+import 'package:alumlink_app/Events/event_page.dart';
+import 'package:alumlink_app/Others_profile/alumprofile.dart'; // Import AlumniCard widget
 class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -60,8 +62,40 @@ class HomePageContent extends StatelessWidget {
                 'Upcoming Events',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              EventCard('Alumni Meetup', 'July 20, 2024'),
-              EventCard('Tech Talk', 'July 25, 2024'),
+              EventCard(
+                'Alumni Meetup', 'July 20, 2024',
+                onTap: () {
+                  Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EventPage(
+                eventName: "Alumni Meetup",
+                eventLocation: 'Tech Hub, Downtown', // Provide actual data
+                eventDate: "July 20, 2024",
+                eventTime: '10:00 AM - 2:00 PM', // Provide actual data
+                eventDescription: 'Join us for a Alumni meetup', // Provide actual data
+              ),
+            ),
+          );
+                },
+              ),
+              EventCard(
+                'Tech Talk', 'July 25, 2024',
+                onTap: () {
+                  Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EventPage(
+                eventName: "Tech Talk",
+                eventLocation: 'Tech Hub, Downtown', // Provide actual data
+                eventDate: "July 25, 2024",
+                eventTime: '10:00 AM - 2:00 PM', // Provide actual data
+                eventDescription: 'Join us for a Tech Talk', // Provide actual data
+              ),
+            ),
+          );
+                },
+              ),
               // More sections
             ],
           ),
@@ -70,6 +104,7 @@ class HomePageContent extends StatelessWidget {
     );
   }
 }
+
 
 class AlumniCard extends StatelessWidget {
   final String name;
@@ -80,34 +115,36 @@ class AlumniCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            SizedBox(height: 5),
-            Text(jobTitle),
-          ],
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfilePage(
+                name: name,
+                Major: 'Computer Science', // Replace with actual data
+                degree: 'Bachelor of Science', // Replace with actual data
+                GraduationDate: 'May 2020', // Replace with actual data
+                email: 'johndoe@example.com', // Replace with actual data
+                linkedin: 'linkedin.com/in/johndoe', // Replace with actual data
+                phone: '+1 123-456-7890', // Replace with actual data
+                location: 'City, Country', // Replace with actual data
+                University: 'University of Example', // Replace with actual data
+              ),
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              SizedBox(height: 5),
+              Text(jobTitle),
+            ],
+          ),
         ),
-      ),
-    );
-  }
-}
-
-class EventCard extends StatelessWidget {
-  final String eventName;
-  final String eventDate;
-
-  EventCard(this.eventName, this.eventDate);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(eventName),
-        subtitle: Text(eventDate),
-        trailing: Icon(Icons.arrow_forward),
       ),
     );
   }

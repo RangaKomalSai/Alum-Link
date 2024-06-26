@@ -46,20 +46,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Set preferred height of app bar
+        preferredSize: Size.fromHeight(70.0), // Set preferred height of app bar
         child: AppBar(
-          toolbarHeight: 60.0, // Set height of app bar
+          toolbarHeight: 70.0, // Set height of app bar
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 25,
+                radius: 30,
                 backgroundImage: AssetImage("lib/Images/Alumlinklogo.png"),
               ),
               SizedBox(width: 15), // Adjust spacing between logo and title
               Text(
                 'Alumlink',
-                style: TextStyle(color: Colors.black, fontSize: 30 ,fontFamily:'MyFont1'),
+                style: TextStyle(color: Colors.black, fontSize: 50 ,fontFamily:'MyFont'),
               ),
             ],
           ),
