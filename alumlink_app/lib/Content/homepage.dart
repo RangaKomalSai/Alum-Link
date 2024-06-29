@@ -15,15 +15,12 @@ class HomePageContent extends StatelessWidget {
               // Welcome Banner
               Text(
                 'Explore Alumlink, bridging the past to the future!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),
               ),
               SizedBox(height: 10),
               // Profile Summary
               ListTile(
-                leading: CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage("lib/Images/Alumlinklogo.png"),
-                ),
+                leading: Icon(Icons.account_circle, size: 50),
                 title: Text('John Doe'),
                 subtitle: Text('Computer Science Major'),
               ),

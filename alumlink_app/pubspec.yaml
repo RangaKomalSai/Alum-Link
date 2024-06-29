@@ -32,5 +32,13 @@ flutter:
       fonts:
         - asset: lib/Fonts/MyFont1.ttf
           weight: 900
+    - family: MyFont2
+      fonts:
+        - asset: lib/Fonts/MyFont2.otf
+          weight: 700
+    - family: MyFont3
+      fonts:
+        - asset: lib/Fonts/MyFont3.otf
+          weight: 700
 
   # Other Flutter specific configurations can go here

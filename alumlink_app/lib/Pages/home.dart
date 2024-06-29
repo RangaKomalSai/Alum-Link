@@ -18,7 +18,8 @@ import 'package:alumlink_app/Content/homepage.dart';
 import 'package:alumlink_app/Content/Mentorship.dart';
 import 'package:alumlink_app/Content/jobs.dart';
 import 'package:alumlink_app/Content/directorypage.dart';
-import 'package:alumlink_app/Content/settings.dart';
+import 'package:alumlink_app/Content/Settings/settings.dart';
+import 'logout.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,21 +53,25 @@ class _HomePageState extends State<HomePage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage("lib/Images/Alumlinklogo.png"),
+              Image.asset(
+                "lib/Images/Alumlinklogo.png",
+                height: 50,
+                width: 50,
               ),
               SizedBox(width: 15), // Adjust spacing between logo and title
               Text(
                 'Alumlink',
-                style: TextStyle(color: Colors.black, fontSize: 50 ,fontFamily:'MyFont'),
+                style: TextStyle(color: Colors.black, fontSize: 50, fontFamily: 'MyFont'),
               ),
             ],
           ),
           backgroundColor: Colors.blue[200],
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.account_circle , size: 30,),
+              icon: const Icon(
+                Icons.account_circle,
+                size: 30,
+              ),
               tooltip: 'Profile',
               onPressed: () {
                 // Navigate to profile page
@@ -78,10 +83,17 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(width: 10),
             IconButton(
-              icon: const Icon(Icons.logout , size: 30,),
+              icon: const Icon(
+                Icons.logout,
+                size: 30,
+              ),
               tooltip: 'Logout',
               onPressed: () {
                 // Perform logout action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogoutPage()),
+                );
               },
             ),
             SizedBox(width: 10),
@@ -103,157 +115,14 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
+                    fontFamily: 'MyFont2',
                   ),
                 ),
               ),
             ),
             ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/deep-learning.png"),
-              ),
-              title: Text('AI/ML'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AIML()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/DS.png"),
-              ),
-              title: Text('Datascience'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DS()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/DS.png"),
-              ),
-              title: Text('Software Development'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => dev()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/cybersecurity.png"),
-              ),
-              title: Text('Cybersecurity'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => cybersec()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Networking.png"),
-              ),
-              title: Text('Networking'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Networking()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Finance.png"),
-              ),
-              title: Text('Finance'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Fin()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Marketing.png"),
-              ),
-              title: Text('Marketing'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => mart()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/mgmt.png"),
-              ),
-              title: Text('Management'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => mgmt()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Electrical.png"),
-              ),
-              title: Text('Electrical and Electronics'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => elec()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Mechanical.png"),
-              ),
-              title: Text('Mechanical'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => mech()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Civil.png"),
-              ),
-              title: Text('Civil'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => civil()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Chemical.png"),
-              ),
-              title: Text('Chemical'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => chem()),
-                );
-              },
-            ),
-            ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Aero.png"),
+              leading: Icon(
+                Icons.all_inclusive_rounded,
               ),
               title: Text('Aerospace'),
               onTap: () {
@@ -264,14 +133,146 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: ImageIcon(
-                AssetImage("lib/Images/Physics.png"),
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('AI/ML'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AIML()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Chemical'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => chem()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Civil'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => civil()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Data Science'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DS()),
+                );
+              },
+            ),
+            ListTile(
+              leading:Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Electrical and Electronics'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => elec()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Finance'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Fin()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Management'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mgmt()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Marketing'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mart()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Mechanical'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => mech()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Networking'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Networking()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
               ),
               title: Text('Physics'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => physics()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.all_inclusive_rounded,
+              ),
+              title: Text('Software Development'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => dev()),
                 );
               },
             ),

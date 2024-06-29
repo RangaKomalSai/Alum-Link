@@ -14,7 +14,14 @@ class DS extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Science and Analytics'),
+        title: Text('Data Science and Analytics',
+        style: TextStyle(
+            fontSize: 24, // Customize the font size
+            fontWeight: FontWeight.bold, // Customize the font weight
+            fontFamily: 'MyFont2', // Replace with your desired font family
+            color: Colors.white, // Customize the text color
+          ),
+          ),
         backgroundColor: Colors.blue[200],
       ),
       body: ListView.builder(
