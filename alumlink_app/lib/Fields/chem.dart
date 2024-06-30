@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'alumnus.dart';
+import '../models/alumni_model.dart';
 
 class chem extends StatelessWidget {
   final List<Alumnus> alumni = [

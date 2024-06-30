@@ -15,8 +15,8 @@ import 'package:alumlink_app/Fields/aero.dart';
 import 'package:alumlink_app/Fields/physics.dart';
 import 'package:alumlink_app/Profile/profile.dart';
 import 'package:alumlink_app/Content/homepage.dart';
-import 'package:alumlink_app/Content/Mentorship.dart';
-import 'package:alumlink_app/Content/jobs.dart';
+import 'package:alumlink_app/Content/Mentor/Mentorship.dart';
+import 'package:alumlink_app/Content/Jobs/jobs.dart';
 import 'package:alumlink_app/Content/directorypage.dart';
 import 'package:alumlink_app/Content/Settings/settings.dart';
 import 'logout.dart';
@@ -61,7 +61,8 @@ class _HomePageState extends State<HomePage> {
               SizedBox(width: 15), // Adjust spacing between logo and title
               Text(
                 'Alumlink',
-                style: TextStyle(color: Colors.black, fontSize: 50, fontFamily: 'MyFont'),
+                style: TextStyle(
+                    color: Colors.black, fontSize: 50, fontFamily: 'MyFont'),
               ),
             ],
           ),
@@ -181,7 +182,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading:Icon(
+              leading: Icon(
                 Icons.all_inclusive_rounded,
               ),
               title: Text('Electrical and Electronics'),
