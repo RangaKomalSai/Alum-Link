@@ -42,8 +42,15 @@ class JobsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Job Postings'),
+        title: Text('Job Postings'
+        ,style: TextStyle(
+            fontSize: 24, 
+            fontWeight: FontWeight.bold, 
+            fontFamily: 'MyFont2',
+          ),
+          ),
         backgroundColor: Colors.blue[200],
       ),
       body: ListView.builder(

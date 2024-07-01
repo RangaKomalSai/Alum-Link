@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'MyFont3',
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

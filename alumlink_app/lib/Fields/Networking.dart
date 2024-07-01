@@ -22,7 +22,7 @@ class Networking extends StatelessWidget {
             color: Colors.white, // Customize the text color
           ),
           ),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.blue,
       ),
       body: ListView.builder(
         itemCount: alumni.length,

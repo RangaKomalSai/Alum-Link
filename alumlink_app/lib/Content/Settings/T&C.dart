@@ -13,7 +13,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             color: Colors.white, // Customize the text color
           ),
           ),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.blue,
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),

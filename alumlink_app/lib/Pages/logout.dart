@@ -5,9 +5,10 @@ class LogoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Logout'),
-        backgroundColor: Colors.blue[300],
+        title: Text('Logout' , style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),),
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Padding(

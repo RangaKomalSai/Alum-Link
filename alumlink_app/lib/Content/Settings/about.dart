@@ -14,7 +14,7 @@ class AboutPage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -17,7 +17,7 @@ import 'package:alumlink_app/Profile/profile.dart';
 import 'package:alumlink_app/Content/homepage.dart';
 import 'package:alumlink_app/Content/Mentor/Mentorship.dart';
 import 'package:alumlink_app/Content/Jobs/jobs.dart';
-import 'package:alumlink_app/Content/directorypage.dart';
+import 'package:alumlink_app/Content/directory/directorypage.dart';
 import 'package:alumlink_app/Content/Settings/settings.dart';
 import 'logout.dart';
 
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.blue,
           actions: <Widget>[
             IconButton(
               icon: const Icon(
@@ -105,16 +105,16 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
+            
             Container(
               height: 75.0,
               child: DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue[200],
+                  color: Colors.blue,
                 ),
                 child: Text(
                   'Fields',
                   style: TextStyle(
-                    color: Colors.white,
                     fontSize: 24,
                     fontFamily: 'MyFont2',
                   ),
@@ -124,6 +124,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(
                 Icons.all_inclusive_rounded,
+
               ),
               title: Text('Aerospace'),
               onTap: () {
@@ -285,7 +286,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors.blue[200],
+          canvasColor: Colors.blue,
         ),
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[

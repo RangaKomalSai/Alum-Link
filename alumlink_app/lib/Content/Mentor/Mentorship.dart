@@ -37,8 +37,15 @@ class MentorshipPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Mentorship Program'),
+        title: Text('Mentorship Program',
+        style: TextStyle(
+            fontSize: 24, // Customize the font size
+            fontWeight: FontWeight.bold, // Customize the font weight
+            fontFamily: 'MyFont2', // Replace with your desired font family// Customize the text color
+          ),
+          ),
         backgroundColor: Colors.blue[200],
       ),
       body: ListView.builder(

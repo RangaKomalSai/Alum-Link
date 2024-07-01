@@ -13,11 +13,9 @@ class SettingsPage extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'MyFont2', // Customize the font family
             fontSize: 24, // Customize the font size
-            fontWeight: FontWeight.bold, // Customize the font weight
-            color: Colors.white, // Customize the color
+            fontWeight: FontWeight.bold, // Customize the font weight// Customize the color
           ),
         ),
-        centerTitle: true,
         backgroundColor: Colors.blue[200], // Customize the AppBar color
       ),
       body: ListView(

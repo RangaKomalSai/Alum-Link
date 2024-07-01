@@ -42,7 +42,7 @@ class _AccountPageState extends State<AccountPage> {
             color: Colors.white, // Set the desired text color
           ),
         ),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.blue,
         actions: [
           IconButton(
             icon: Icon(Icons.edit),

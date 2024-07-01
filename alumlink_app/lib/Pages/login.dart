@@ -50,9 +50,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Login'),
-        backgroundColor: Colors.blue[200],
+        title: Text('Login' , style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),),
+        backgroundColor: Colors.blue,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

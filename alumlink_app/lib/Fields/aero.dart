@@ -21,7 +21,7 @@ class aero extends StatelessWidget {
             fontFamily: 'MyFont2', // Replace with your desired font family
             color: Colors.white, // Customize the text color
           ),),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.blue,
       ),
       body: ListView.builder(
         itemCount: alumni.length,
