@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -9,14 +10,36 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void _register() {
-    final name = _nameController.text;
+  void _register() async {
     final email = _emailController.text;
     final password = _passwordController.text;
 
-    // Perform your registration logic here
-    print('Name: $name, Email: $email, Password: $password');
+    try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // You can also save the user's name to the Firestore database if needed
+      print('User registered: ${userCredential.user?.email}');
+      
+      // Clear the text fields
+      _nameController.clear();
+      _emailController.clear();
+      _passwordController.clear();
+
+      // Show success message or navigate to another page
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Registration Successful'),
+      ));
+    } catch (e) {
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Registration Failed'),
+      ));
+    }
   }
 
   @override
@@ -24,7 +47,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('User Registration' , style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),),
+        title: Text(
+          'User Registration',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'MyFont2'),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Padding(

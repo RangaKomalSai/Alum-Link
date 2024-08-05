@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'home.dart';
-import 'registration.dart'; 
+import 'registration.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,17 +11,24 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void _login() {
+  void _login() async {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    if (username == 'user' && password == 'password') {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
-    } else {
+    } catch (e) {
+      print('Error: $e');
       showDialog(
         context: context,
         builder: (context) {
@@ -52,7 +60,10 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text('Login' , style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),),
+        title: Text(
+          'Login',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'MyFont2'),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Column(

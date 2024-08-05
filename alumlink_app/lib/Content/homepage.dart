@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:alumlink_app/Events/event_card.dart';
 import 'package:alumlink_app/Events/event_page.dart';
 import 'package:alumlink_app/Others_profile/alumprofile.dart'; // Import AlumniCard widget
+import 'package:alumlink_app/Content/chatbot.dart'; // Import your chatbot page
+
 class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class HomePageContent extends StatelessWidget {
               // Welcome Banner
               Text(
                 'Explore Alumlink, bridging the past to the future!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , fontFamily: 'MyFont2'),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'MyFont2'),
               ),
               SizedBox(height: 10),
               // Profile Summary
@@ -64,34 +66,34 @@ class HomePageContent extends StatelessWidget {
                 'Alumni Meetup', 'July 20, 2024',
                 onTap: () {
                   Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EventPage(
-                eventName: "Alumni Meetup",
-                eventLocation: 'Tech Hub, Downtown', // Provide actual data
-                eventDate: "July 20, 2024",
-                eventTime: '10:00 AM - 2:00 PM', // Provide actual data
-                eventDescription: 'Join us for a Alumni meetup', // Provide actual data
-              ),
-            ),
-          );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventPage(
+                        eventName: "Alumni Meetup",
+                        eventLocation: 'Tech Hub, Downtown', // Provide actual data
+                        eventDate: "July 20, 2024",
+                        eventTime: '10:00 AM - 2:00 PM', // Provide actual data
+                        eventDescription: 'Join us for a Alumni meetup', // Provide actual data
+                      ),
+                    ),
+                  );
                 },
               ),
               EventCard(
                 'Tech Talk', 'July 25, 2024',
                 onTap: () {
                   Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EventPage(
-                eventName: "Tech Talk",
-                eventLocation: 'Tech Hub, Downtown', // Provide actual data
-                eventDate: "July 25, 2024",
-                eventTime: '10:00 AM - 2:00 PM', // Provide actual data
-                eventDescription: 'Join us for a Tech Talk', // Provide actual data
-              ),
-            ),
-          );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventPage(
+                        eventName: "Tech Talk",
+                        eventLocation: 'Tech Hub, Downtown', // Provide actual data
+                        eventDate: "July 25, 2024",
+                        eventTime: '10:00 AM - 2:00 PM', // Provide actual data
+                        eventDescription: 'Join us for a Tech Talk', // Provide actual data
+                      ),
+                    ),
+                  );
                 },
               ),
               // More sections
@@ -99,10 +101,19 @@ class HomePageContent extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatbotPage()),
+          );
+        },
+        child: Icon(Icons.chat),
+        backgroundColor: Colors.blue,
+      ),
     );
   }
 }
-
 
 class AlumniCard extends StatelessWidget {
   final String name;

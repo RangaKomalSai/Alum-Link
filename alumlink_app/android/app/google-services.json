@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "326833636520",
+    "firebase_url": "https://alumlink-358d0-default-rtdb.firebaseio.com",
+    "project_id": "alumlink-358d0",
+    "storage_bucket": "alumlink-358d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326833636520:android:bf1344d8e9d99b22b9ee9d",
+        "android_client_info": {
+          "package_name": "com.Mycompany.Alumlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBROIqszGD69GuE5TJTSkr2YY9q4UpXQls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326833636520:android:779aea2928ea86a7b9ee9d",
+        "android_client_info": {
+          "package_name": "com.example.alumlink_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBROIqszGD69GuE5TJTSkr2YY9q4UpXQls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
