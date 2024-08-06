@@ -105,7 +105,7 @@ class HomePageContent extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ChatbotPage()),
+            MaterialPageRoute(builder: (context) => ChatScreen()),
           );
         },
         child: Icon(Icons.chat),

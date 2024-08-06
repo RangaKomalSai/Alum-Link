@@ -1,46 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
-class ChatbotPage extends StatefulWidget {
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
-  _ChatbotPageState createState() => _ChatbotPageState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatbotPageState extends State<ChatbotPage> {
-  List<String> chatHistory = [];
-  TextEditingController _controller = TextEditingController();
+class _ChatScreenState extends State<ChatScreen> {
 
-  Future<void> _sendMessage(String message) async {
-    setState(() {
-      chatHistory.add("You: $message");
-      _controller.clear();
-    });
+  List<Content> history = [];
+  late final GenerativeModel _model;
+  late final ChatSession _chat;
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _textController = TextEditingController();
+  final FocusNode _textFieldFocus = FocusNode();
+  bool _loading = false;
+  static const _apiKey = 'YOUR API KEY'; // https://ai.google.dev/ (Get API key from this link)
 
-    final response = await http.post(
-      Uri.parse('http://YOUR_FASTAPI_SERVER_IP:8000/chat'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'message': message,
-      }),
+  void _scrollDown() {
+    WidgetsBinding.instance.addPostFrameCallback(
+          (_) => _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        duration: const Duration(
+          milliseconds: 750,
+        ),
+        curve: Curves.easeOutCirc,
+      ),
     );
+  }
 
-    if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-      setState(() {
-        chatHistory.add("Chatbot: ${jsonResponse['response']}");
-      });
-    } else {
-      setState(() {
-        chatHistory.add("Chatbot: Error getting response");
-      });
-    }
+  @override
+  void initState() {
+    super.initState();
+    _model = GenerativeModel(
+      model: 'gemini-pro', apiKey: _apiKey,
+    );
+    _chat = _model.startChat();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
@@ -58,24 +61,28 @@ class _ChatbotPageState extends State<ChatbotPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: chatHistory.length,
+              itemCount: history.length,
+              controller: _scrollController,
+              reverse: true,
               itemBuilder: (context, index) {
-                bool isUserMessage = index % 2 == 0;
+                var content = history[index];
+                var text = content.parts
+                    .whereType<TextPart>()
+                    .map<String>((e) => e.text)
+                    .join('');
+                bool isUserMessage = content.role == 'user';
                 return Align(
                   alignment: isUserMessage
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Container(
-                    margin:
-                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                    margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                     padding: EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      color: isUserMessage
-                          ? Colors.blue[100]
-                          : Colors.grey[300],
+                      color: isUserMessage ? Colors.blue[100] : Colors.grey[300],
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Text(chatHistory[index]),
+                    child: Text(text),
                   ),
                 );
               },
@@ -87,7 +94,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _controller,
+                    controller: _textController,
                     decoration: InputDecoration(
                       labelText: 'Type a message',
                       border: OutlineInputBorder(
@@ -99,8 +106,11 @@ class _ChatbotPageState extends State<ChatbotPage> {
                 IconButton(
                   icon: Icon(Icons.send),
                   onPressed: () {
-                    if (_controller.text.isNotEmpty) {
-                      _sendMessage(_controller.text);
+                    if (_textController.text.isNotEmpty) {
+                      setState(() {
+                        history.add(Content('user', [TextPart(_textController.text)]));
+                      });
+                      _sendChatMessage(_textController.text, history.length - 1);
                     }
                   },
                 ),
@@ -109,6 +119,72 @@ class _ChatbotPageState extends State<ChatbotPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _sendChatMessage(String message, int historyIndex) async {
+    setState(() {
+      _loading = true;
+      _textController.clear();
+      _textFieldFocus.unfocus();
+      _scrollDown();
+    });
+
+    List<Part> parts = [];
+
+    try {
+      var response = _chat.sendMessageStream(
+        Content.text(message),
+      );
+      await for (var item in response) {
+        var text = item.text;
+        if (text == null) {
+          _showError('No response from API.');
+          return;
+        } else {
+          setState(() {
+            _loading = false;
+            parts.add(TextPart(text));
+            if ((history.length - 1) == historyIndex) {
+              history.removeAt(historyIndex);
+            }
+            history.insert(historyIndex, Content('model', parts));
+          });
+        }
+      }
+    } catch (e, t) {
+      print(e);
+      print(t);
+      _showError(e.toString());
+      setState(() {
+        _loading = false;
+      });
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
+  void _showError(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Something went wrong'),
+          content: SingleChildScrollView(
+            child: SelectableText(message),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            )
+          ],
+        );
+      },
     );
   }
 }
